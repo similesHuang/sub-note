@@ -1,23 +1,30 @@
-import logo from './logo.svg';
+import {  Route, Routes,Link, useLocation, Navigate, } from 'react-router-dom';
 import './App.css';
-
+import './styles/common.less';
+import './styles/dark.less';
+import routes from './routes';
+import { useRouter } from './hooks';
+import NoteMenu from './components/menu';
+import { Row,Col } from 'antd';
 function App() {
+  
+  const location = useLocation();
+  const router = useRouter(routes);
+
+  if(location.pathname==='/'){
+     return <Navigate to={'/form'} replace></Navigate>
+  }
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+       <Row style={{display:'flex'}}>
+         <Col span={2} style={{flex:1,maxWidth:'10%',whiteSpace:"nowrap"}}>
+           <NoteMenu/>
+         </Col>
+         <Col span={22} style={{flex:6,maxWidth:'90%'}}>
+            {router}
+         </Col>
+       </Row>
     </div>
   );
 }

@@ -1,0 +1,41 @@
+[data-name="sub-note"]{
+    --bg-color: #fff; /* 白天模式背景色 */
+    --text-color: #333; /* 白天模式文字颜色 */
+    --hover-color:rgb(0 82 217); /* 白天模式悬浮颜色 */
+    --click-color:rgb(0 82 217);/* 白天模式点击颜色 */
+    --border-color:#ced3da;
+
+}
+.micro-menu{
+    height: calc(100vh - 50px);
+    border-right:1px solid  var(--border-color);
+    background-color: var(--bg-color);
+  
+    &-title{
+        padding: 5px 10px;
+        font-size: 22px;
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 10px;
+    }
+    //  background-color: var(--bg-menu-color);
+     &-item{
+      padding: 8px;
+      cursor: pointer;
+      font-size: 18px;
+    
+      &:hover{
+         background-color: var(--hover-color);
+         color: white;
+      }
+      &-selected{
+         background-color:  var(--click-color);
+         color: white;
+      }
+       &-icon{
+         padding-right: 14px;
+       }
+       &-content{
+         
+       }
+     }
+}

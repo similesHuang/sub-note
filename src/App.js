@@ -12,11 +12,7 @@ function App() {
   
   const location = useLocation();
   const router = useRouter(routes);
-   
-  const diapatch  = useDispatch();
-  
-  diapatch({type:'SET_SEARCH_VALUE',payload:'11'})
-
+     
   if(location.pathname==='/'){
      return <Navigate to={'/form'} replace></Navigate>
   }

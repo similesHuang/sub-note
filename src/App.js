@@ -6,17 +6,23 @@ import routes from './routes';
 import { useRouter } from './hooks';
 import NoteMenu from './components/menu';
 import { Row,Col } from 'antd';
+import { useDispatch } from './hooks/GlobalProvider';
+
 function App() {
   
   const location = useLocation();
   const router = useRouter(routes);
+   
+  const diapatch  = useDispatch();
+  
+  diapatch({type:'SET_SEARCH_VALUE',payload:'11'})
 
   if(location.pathname==='/'){
      return <Navigate to={'/form'} replace></Navigate>
   }
   
   return (
-    <div className="App">
+    <div className="App" data-note-theme='light'>
        <Row style={{display:'flex'}}>
          <Col span={2} style={{flex:1,maxWidth:'10%',whiteSpace:"nowrap"}}>
            <NoteMenu/>
@@ -25,6 +31,7 @@ function App() {
             {router}
          </Col>
        </Row>
+     
     </div>
   );
 }

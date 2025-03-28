@@ -1,9 +1,10 @@
-[data-name="sub-note"]{
+[data-note-theme='light'],:root{
     --bg-color: #fff; /* 白天模式背景色 */
     --text-color: #333; /* 白天模式文字颜色 */
     --hover-color:rgb(0 82 217); /* 白天模式悬浮颜色 */
     --click-color:rgb(0 82 217);/* 白天模式点击颜色 */
     --border-color:#ced3da;
+    --hover-text-color:white;
 
 }
 .micro-menu{
@@ -24,12 +25,12 @@
       font-size: 18px;
     
       &:hover{
-         background-color: var(--hover-color);
-         color: white;
+         background-color: var(--hover-color); 
+         color: var(--hover-text-color);
       }
       &-selected{
          background-color:  var(--click-color);
-         color: white;
+         color: var(--hover-text-color);
       }
        &-icon{
          padding-right: 14px;

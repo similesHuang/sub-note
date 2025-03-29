@@ -3,7 +3,7 @@ import React, { createContext, useContext, useEffect, useReducer, useState } fro
 export const StoreContext = createContext({});
 export const DispatchContext = createContext({});
 
-const GlobalProvider = ({children,getGlobalState,setGlobalState,onGlobalStateChange,offGlobalStateChange})=>{
+const GlobalProvider = ({children,getGlobalState,setGlobalState,onGlobalStateChange})=>{
  
      const initState = getGlobalState? getGlobalState():{};
      
@@ -39,9 +39,8 @@ const GlobalProvider = ({children,getGlobalState,setGlobalState,onGlobalStateCha
     const [store,dispatch] = useReducer(reducer,initState);
     
     useEffect(() => {
-     if (!onGlobalStateChange || !offGlobalStateChange) return;
- 
-     // 定义回调函数
+     if (!onGlobalStateChange) return;
+     
      const handleGlobalStateChange = (state) => {
          dispatch({
              type: 'SYNC_STATE',
@@ -50,13 +49,9 @@ const GlobalProvider = ({children,getGlobalState,setGlobalState,onGlobalStateCha
      };
  
      // 监听全局状态变化（立即执行一次）
-     onGlobalStateChange(handleGlobalStateChange, true);
+     onGlobalStateChange?.(handleGlobalStateChange, true);
  
-     // 返回清理函数，在组件卸载或依赖变化时取消监听
-     return () => {
-         offGlobalStateChange();
-     };
- }, [onGlobalStateChange, offGlobalStateChange]);
+ }, [onGlobalStateChange]);
     
 
      return <StoreContext value={store}>

@@ -37,8 +37,8 @@ if (!window.__POWERED_BY_QIANKUN__) {
 
 // 各个生命周期
 // bootstrap 只会在微应用初始化的时候调用一次，下次微应用重新进入时会直接调用 mount 钩子，不会再重复触发 bootstrap。
-export async function bootstrap(a) {
-  console.log(a)
+export async function bootstrap() {
+ 
 }
 
 

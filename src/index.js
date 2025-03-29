@@ -11,6 +11,7 @@ let root;
 export let getGlobalState;
 export let onGlobalStateChange;
 export let setGlobalState;
+export let offGlobalStateChange
 function render(props) {
   const { container } = props;
 
@@ -23,7 +24,7 @@ function render(props) {
   root = ReactDOM.createRoot(dom);
   root.render(
     <BrowserRouter basename='/sub-note'>
-      <GlobalProvider getGlobalState={getGlobalState} setGlobalState={setGlobalState} onGlobalStateChange={onGlobalStateChange} >
+      <GlobalProvider getGlobalState={getGlobalState} setGlobalState={setGlobalState} onGlobalStateChange={onGlobalStateChange} offGlobalStateChange={offGlobalStateChange}>
          <App/>
       </GlobalProvider>
     </BrowserRouter>
@@ -47,7 +48,7 @@ export async function mount(props) {
    getGlobalState =props.getGlobalState;
    onGlobalStateChange = props.onGlobalStateChange;
    setGlobalState = props.setGlobalState;
-   
+   offGlobalStateChange = props.offGlobalStateChange;
   render(props); 
 }
 

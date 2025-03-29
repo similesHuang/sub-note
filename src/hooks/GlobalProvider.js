@@ -3,7 +3,7 @@ import React, { createContext, useContext, useEffect, useReducer, useState } fro
 export const StoreContext = createContext({});
 export const DispatchContext = createContext({});
 
-const GlobalProvider = ({children,getGlobalState,setGlobalState,onGlobalStateChange})=>{
+const GlobalProvider = ({children,getGlobalState,setGlobalState,onGlobalStateChange,offGlobalStateChange})=>{
  
      const initState = getGlobalState? getGlobalState():{};
      
@@ -38,21 +38,25 @@ const GlobalProvider = ({children,getGlobalState,setGlobalState,onGlobalStateCha
 
     const [store,dispatch] = useReducer(reducer,initState);
     
-    useEffect(()=>{
-       // 监听主应用状态变化
-       if(!onGlobalStateChange) return ;
-       const unsubscribe = onGlobalStateChange((state) => {
-          // 当主应用状态变化时，同步到子应用
-          dispatch({
-            type: 'SYNC_STATE',
-            payload: state
-          });
-        }, true); // 立即执行一次
-
-        return () => {
-          unsubscribe?.();
-        };
-    },[onGlobalStateChange])
+    useEffect(() => {
+     if (!onGlobalStateChange || !offGlobalStateChange) return;
+ 
+     // 定义回调函数
+     const handleGlobalStateChange = (state) => {
+         dispatch({
+             type: 'SYNC_STATE',
+             payload: state,
+         });
+     };
+ 
+     // 监听全局状态变化（立即执行一次）
+     onGlobalStateChange(handleGlobalStateChange, true);
+ 
+     // 返回清理函数，在组件卸载或依赖变化时取消监听
+     return () => {
+         offGlobalStateChange();
+     };
+ }, [onGlobalStateChange, offGlobalStateChange]);
     
 
      return <StoreContext value={store}>

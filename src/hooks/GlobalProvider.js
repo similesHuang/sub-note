@@ -48,7 +48,7 @@ const GlobalProvider = ({children,getGlobalState,setGlobalState,onGlobalStateCha
          });
      };
  
-     // 监听全局状态变化（立即执行一次）
+     // 监听全局状态变化
      onGlobalStateChange?.(handleGlobalStateChange, true);
  
  }, [onGlobalStateChange]);

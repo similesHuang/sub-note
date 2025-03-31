@@ -14,7 +14,7 @@ export let setGlobalState;
 function render(props) {
   const { container } = props;
 
-  const dom = container ? container.querySelector('#root') : document.getElementById('root')
+  const dom = container ? container.querySelector('#sub-root') : document.getElementById('sub-root')
   
    // 每次mount都创建新的root实例，避免复用已卸载的root
    if (root) {

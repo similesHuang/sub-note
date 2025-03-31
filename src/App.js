@@ -6,19 +6,28 @@ import routes from './routes';
 import { useRouter } from './hooks';
 import NoteMenu from './components/menu';
 import { Row,Col } from 'antd';
-import { useDispatch } from './hooks/GlobalProvider';
+import { useStore } from './hooks/GlobalProvider';
+import { useEffect, useRef } from 'react';
 
 function App() {
   
   const location = useLocation();
   const router = useRouter(routes);
+  const {theme} = useStore();
+   
+  useEffect(()=>{
+     const root = document.querySelector('#sub-root');
+     if(window.__POWERED_BY_QIANKUN__){
+      root.setAttribute('data-note-theme',theme)
+     }
      
+  },[theme])
   if(location.pathname==='/'){
      return <Navigate to={'/form'} replace></Navigate>
   }
   
   return (
-    <div className="App" data-note-theme='light'>
+    <div className="App">
        <Row style={{display:'flex'}}>
          <Col span={2} style={{flex:1,maxWidth:'10%',whiteSpace:"nowrap"}}>
            <NoteMenu/>

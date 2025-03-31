@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import routes from "../routes";
 import { useNavigate } from "react-router-dom";
+import { useStore } from "../hooks/GlobalProvider";
 
 const NoteMenu = ()=>{
     
     const [selectedMenu,setSelectedMenu] = useState('form');
     const navigate = useNavigate();
+    const {theme} = useStore();
 
     const renderMenu =(routes)=>{
       return routes.map((menu)=>{
@@ -26,7 +28,7 @@ const NoteMenu = ()=>{
     }
 
 
-    return <div className="micro-menu">
+    return <div className="micro-menu" style={{height:`${theme? null:'100vh'}`}}>
             <header className="micro-menu-title"><b>云笔记</b></header>
             {renderMenu(routes)}
            </div>

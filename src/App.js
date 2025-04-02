@@ -28,11 +28,11 @@ function App() {
   
   return (
     <div className="App">
-       <Row style={{display:'flex'}}>
-         <Col span={2} style={{flex:1,maxWidth:'10%',whiteSpace:"nowrap"}}>
+       <Row style={{display:'flex',flexWrap:'nowrap'}}>
+         <Col span={2} style={{flex:1,maxWidth:'10%',minWidth:'100px'}}>
            <NoteMenu/>
          </Col>
-         <Col span={22} style={{flex:6,maxWidth:'90%'}}>
+         <Col span={22} style={{flex:6,maxWidth:'90%',backgroundColor:'rgb(241, 243, 244)',minWidth:'400px'}}>
             {router}
          </Col>
        </Row>
